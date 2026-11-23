@@ -5,7 +5,7 @@ TurboWarp/mirror のコードを使い、Render 上に TurboWarp のミラーを
 
 ## 全体の構成
 
-ミラーを正しく動かすには、Render 上に次の3つのサービスが必要でした。
+ミラーを正しく動かすには、Render 上に次の3つのサービスが必要です。
 
 | サービス | 種類 | 役割 |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ editor.html を index.html にコピー、robots.txt の配置)ためのスク�
 ## 事前準備
 
 - GitHub アカウントと Render アカウント
-- 以下のリポジトリを自分のアカウントにフォークしておく(Git コマンドは不要。GitHub の画面だけで可能)
+- 以下のリポジトリを自分のアカウントにフォークしておいてください。
   - `TurboWarp/mirror`(ミラー本体)
   - `TurboWarp/trampoline`
 
@@ -40,7 +40,7 @@ Render で **New + → Web Service** を選び、フォークした trampoline �
 - デプロイ後、次の URL をブラウザで開いて JSON(`project_token` を含む)が表示されれば成功です。
 
 ```
-https://あなたのtrampoline.onrender.com/api/projects/1379737786
+https://あなたのtrampoline.onrender.com/api/projects/プロジェクトのID番号
 ```
 
 ### 注意
@@ -65,8 +65,6 @@ Render で **New + → Static Site** を選び、`https://github.com/TurboWarp/e
 | --- | --- |
 | Build Command | `npm ci && npm run build` |
 | Publish Directory | `build` |
-
-(この2つの値は推測で案内したものです。実際に動いた設定がこれと違う場合は、書き換えてください。)
 
 さらに、ミラーから取得できるように CORS ヘッダーを追加します。
 
@@ -144,8 +142,7 @@ Render で **New + → Static Site** を選び、フォークしたミラーの�
 
 ### 3-3. ビルドログで確認する
 
-ビルドログの「--- 置換対象 ---」の下に、ファイル名が出ていれば置換は成功です
-(今回は次の5ファイルが出ていた)。
+ビルドログの「--- 置換対象 ---」の下に、ファイル名が出ていれば置換は成功です。
 
 ```
 src/components/tw-studioview/studioview.js
@@ -155,12 +152,12 @@ node_modules/scratch-vm/src/playground/benchmark.js
 node_modules/scratch-vm/src/extensions/scratch3_translate/index.js
 ```
 
-最後に「Your service is live」と表示されればデプロイ完了です。
+最後に「Your service is live🎉」と表示されればデプロイ完了です。
 
 ## 動作確認
 
-- ミラーの URL の末尾に `#プロジェクトID` を付けて開き、プロジェクトが読み込めること。
-- 拡張機能の追加画面で、ギャラリーが表示されること。
+- ミラーの URL の末尾に `#プロジェクトID` を付けて開き、プロジェクトが読み込めることを確認してください。
+- 拡張機能の追加画面で、ギャラリーが表示されることを確認してください。
 - 古いキャッシュが残っていると、修正前のコードが動くことがあります。
   シークレットウィンドウが使えない場合は、**Ctrl+Shift+R**(強制再読み込み)、
   URL に `?v=2` のような文字列を付ける、サイトデータの削除、のいずれかを試してください。
@@ -169,32 +166,32 @@ node_modules/scratch-vm/src/extensions/scratch3_translate/index.js
 
 | 症状 | 原因と対処 |
 | --- | --- |
-| `fatal: destination path 'scratch-gui' already exists` | 前回のビルドのキャッシュが残っている。`build.sh` の先頭で `rm -rf scratch-gui` を実行する。 |
-| `npm error Missing script: "start"`(trampoline) | start スクリプトがない。Start Command を `node src/index.js` にする。 |
-| `Failed to fetch https://trampoline.turbowarp.xyz/api/projects/...` | 公式の trampoline に届いていない。trampoline を自前でホストし、`build.sh` で URL を置換する。 |
-| 「このプロジェクトは未共有」と表示されるが、公式サイトでは読み込める | 自前の trampoline を直接開いて JSON が返るか確認する。返るなら、古いキャッシュを疑う(強制再読み込み)。失敗結果は trampoline 側でも 30 分キャッシュされる。 |
-| 拡張機能ギャラリーが読み込めない | `extensions.turbowarp.org` にアクセスできない可能性がある。ギャラリーを自前でホストし、`EXTENSIONS_HOST` で置換する。CORS ヘッダーの設定も必要。 |
-| 「trampolineのURLが見つかりませんでした」でビルドが止まる | scratch-gui の更新で URL の書き方が変わった可能性がある。ビルドログを確認して、検索範囲を直す。 |
-| ビルド中に `JavaScript heap out of memory` | 環境変数に `NODE_OPTIONS=--max-old-space-size=4096` を追加する。 |
+| `fatal: destination path 'scratch-gui' already exists` | 前回のビルドのキャッシュが残っています。`build.sh` の先頭で `rm -rf scratch-gui` を実行してください。 |
+| `npm error Missing script: "start"`(trampoline) | start スクリプトがありません。Start Command を `node src/index.js` にしてください。 |
+| `Failed to fetch https://trampoline.turbowarp.xyz/api/projects/...` | 公式の trampoline に届いていません。trampoline を自前でホストし、`build.sh` で URL を置換してください。 |
+| 「このプロジェクトは未共有」と表示されるが、公式サイトでは読み込める | 自前の trampoline を直接開いて JSON が返るか確認してください。返ってくるなら、古いキャッシュを疑ってください(強制再読み込み)。失敗結果は trampoline 側でも 30 分キャッシュされます。 |
+| 拡張機能ギャラリーが読み込めない | `extensions.turbowarp.org` にアクセスできない可能性があります。ギャラリーを自前でホストし、`EXTENSIONS_HOST` で置換してください。CORS ヘッダーの設定も必要です。 |
+| 「trampolineのURLが見つかりませんでした」でビルドが止まる | scratch-gui の更新で URL の書き方が変わった可能性があります。ビルドログを確認して、検索範囲を直してください。 |
+| ビルド中に `JavaScript heap out of memory` | 環境変数に `NODE_OPTIONS=--max-old-space-size=4096` を追加してください。 |
 
 ## デバッグのヒント
 
 - Render の Start Command を `cat src/api.js` のように一時的に変えると、サーバーを起動せず
-  ファイルの内容を Logs に表示できる。確認後は元のコマンドに戻すこと。
-- trampoline の環境変数に `NODE_ENV=development` を追加すると、デバッグログが出る。
-  確認後は削除すること。
-- ブラウザの開発者ツールが使えない環境でも、Render の Logs とビルドログだけで原因を絞り込める。
+  ファイルの内容を Logs に表示できます。確認後は元のコマンドに戻してください。
+- trampoline の環境変数に `NODE_ENV=development` を追加すると、デバッグログが出ます。
+  確認後は削除してください。
+- ブラウザの開発者ツールが使えない環境でも、Render の Logs とビルドログだけで原因を絞り込めます。
 
 ## 既知の制限と注意点
 
-- 無料プランの Web Service はスリープする。最初の読み込みが遅くなることがある。
-- trampoline の許可オリジンは `*` のため、URL を知っていれば誰でも利用できる。
-  利用が増える場合は、Render の無料枠を超えないか確認すること。
-- `build.sh` は scratch-gui の最新版をビルドのたびに clone する。
-  ビルドが急に失敗するようになったら、ログを確認すること。
+- 無料プランの Web Service はスリープします。最初の読み込みが遅くなることがあります。
+- trampoline の許可オリジンは `*` のため、URL を知っていれば誰でも利用できます。
+  利用が増える場合は、Render の無料枠を超えないか確認してください。
+- `build.sh` は scratch-gui の最新版をビルドのたびに clone します。
+  ビルドが急に失敗するようになったら、ログを確認してください。
 - 本家のミラーは約1週間ごとに自動更新される。Render では自動更新されないため、
-  必要なら Manual Deploy(Clear build cache & deploy)を実行する。
-  自動で行いたい場合は、Render の Deploy Hook を GitHub Actions の定期実行から呼び出す方法がある。
+  必要なら Manual Deploy(Clear build cache & deploy)を実行してください。
+  自動で行いたい場合は、Render の Deploy Hook を GitHub Actions の定期実行から呼び出す方法があります。
 
 ## 参考
 
