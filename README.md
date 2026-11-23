@@ -23,7 +23,9 @@ editor.html を index.html にコピー、robots.txt の配置)ためのスク�
 - GitHub アカウントと Render アカウント
 - 以下のリポジトリを自分のアカウントにフォークしておいてください。
   - `TurboWarp/mirror`(ミラー本体)
-  - `TurboWarp/trampoline`
+    https://github.com/TurboWarp/mirror
+  - `TurboWarp/trampoline`(トランポリン。ScratchのプロジェクトをURLから読み込むときに必須。)
+    https://github.com/TurboWarp/trampoline
 
 ## 手順1: trampoline をデプロイする
 
